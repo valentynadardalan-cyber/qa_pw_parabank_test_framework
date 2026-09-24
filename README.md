@@ -28,8 +28,59 @@ npm install -g allure-commandline
 
 ## How to run the tests
 
-// TODO - It's part of your task to add the appropriate instructions here. 
+Before running the tests, make sure that the Parabank Administration page
+uses the following settings:
+
+The loan tests automatically configure the required Parabank administration
+settings before requesting a loan.
+
+Do not use the `Clean` or `Initialize` database actions while the tests are
+running.
+
+Run all tests:
+
+```bash
+npm test
+```
+
+Run tests in headed mode:
+
+```bash
+npm run test:headed
+```
+
+Run tests in Playwright UI mode:
+
+```bash
+npm run test:ui
+```
+
+Run a specific test file:
+
+```bash
+npx playwright test path/to/test.spec.js
+```
+
+Run the code-style check:
+
+```bash
+npm run lint
+```
 
 ## How to generate report
 
-// TODO - It's part of your task to add the appropriate instructions here. 
+Test execution creates Allure results in the `allure-results` directory.
+
+Generate the Allure HTML report:
+
+```bash
+npm run report:generate
+```
+
+Open the generated report:
+
+```bash
+npm run report:open
+```
+
+The generated report is stored in the `allure-report` directory.
