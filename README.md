@@ -28,31 +28,29 @@ npm install -g allure-commandline
 
 ## How to run the tests
 
-Before running the tests, make sure that the Parabank Administration page
-uses the following settings:
-
-The loan tests automatically configure the required Parabank administration
-settings before requesting a loan.
-
-Do not use the `Clean` or `Initialize` database actions while the tests are
-running.
-
-Run all tests:
+Make sure that the project dependencies and Playwright browsers are installed:
 
 ```bash
-npm test
+npm ci
+npx playwright install
+```
+
+Run the complete test suite:
+
+```bash
+npx playwright test
 ```
 
 Run tests in headed mode:
 
 ```bash
-npm run test:headed
+npx playwright test --headed
 ```
 
 Run tests in Playwright UI mode:
 
 ```bash
-npm run test:ui
+npx playwright test --ui
 ```
 
 Run a specific test file:
@@ -61,26 +59,49 @@ Run a specific test file:
 npx playwright test path/to/test.spec.js
 ```
 
-Run the code-style check:
+Run tests in debug mode:
 
 ```bash
-npm run lint
+npx playwright test --debug
 ```
+
+The tests require an internet connection to access the public Parabank
+application. Loan tests automatically configure the required administration
+settings before requesting a loan.
+
+Do not use the `Clean` or `Initialize` database actions while the tests are
+running.
 
 ## How to generate report
 
-Test execution creates Allure results in the `allure-results` directory.
+Allure requires Java 8 or newer and the Allure Commandline tool.
 
-Generate the Allure HTML report:
+Install Allure Commandline globally if it is not installed:
 
 ```bash
-npm run report:generate
+npm install -g allure-commandline
+```
+
+Run the tests to create results in the `allure-results` directory:
+
+```bash
+npx playwright test
+```
+
+Generate the HTML report:
+
+```bash
+allure generate allure-results -o allure-report --clean
 ```
 
 Open the generated report:
 
 ```bash
-npm run report:open
+allure open allure-report
 ```
 
-The generated report is stored in the `allure-report` directory.
+Alternatively, generate and open a temporary report with one command:
+
+```bash
+allure serve allure-results
+```
